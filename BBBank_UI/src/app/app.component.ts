@@ -9,7 +9,6 @@ import { TransactionService } from './services/transaction.service';
 })
 export class AppComponent implements OnInit {
   title = 'BBBankUI';
-  headers =['labels','figures'];
   lineGraphData: lineGraphData;
   constructor(private transactionService: TransactionService) {}
   ngOnInit(): void {
