@@ -12,21 +12,19 @@ A RESTful API is an architectural style for an application program interface (AP
 
 In this lab we will be working on two code Bases, **Backend Code base** and **Frontend Code Base**
 
-
-
 ### **Backend Code Base:**
 
-Previously we developed a base structure of an api solution in Asp.net core that have just one function which returns data of the last three years total balances against a given AccountID. 
+Previously we developed a base structure of an api solution in Asp.net core that have just one function which returns data of the last three years total balances against a given AccountID.
  
 ![MicrosoftTeams-image (1)](https://user-images.githubusercontent.com/100709775/161592915-395a3983-2efb-459d-ac63-1815249193f7.png)
 
-There are 4 Projects in the solution. 
+There are 4 Projects in the solution.
 
-- **Entities** : That have DB Model Account with one-to-many Transaction and Response Model of LineGraphData that will be returned as API Response. 
-- **Infrastructure**: BBBankContext that serves as fake DBContext that populates one Account with three Transactions with hardcoded data. 
-- **Services**: That has TranasacionService with the logic of converting Account and its Transactions into LineGraphData after fetching it from BBBankContext. 
+- **Entities** : That have DB Model Account with one-to-many Transaction and Response Model of LineGraphData that will be returned as API Response.
+- **Infrastructure**: BBBankContext that serves as fake DBContext that populates one Account with three Transactions with hardcoded data.
+- **Services**: That has TransactionService with the logic of converting Account and its Transactions into LineGraphData after fetching it from BBBankContext.
 
-- **BBBankAPI**: That has TransactionController which is implementation of ASP.net core’s API, to call Services layer. 
+- **BBBankAPI**: That has TransactionController which is implementation of ASP.net core’s API, to call Services layer.
 
 ![MicrosoftTeams-image](https://user-images.githubusercontent.com/100709775/161592969-78e99e2b-070f-45a5-a15f-8299364f0554.png)
 
@@ -36,7 +34,7 @@ For more details about this base project See: https://github.com/PatternsTechGit
 
 ### **Frontend Code Base:**
 
-Previously we scafolded a new Angular application in which we have integrated 
+Previously we scaffolded a new Angular application in which we have integrated 
 
 * FontAwesome
 * Bootstrap toolbar
@@ -50,11 +48,11 @@ _____________
 * We will create client side models to receive data
 * We will create transaction service to call the API
 * We will fix the Cors Error on the server side
-* We will populte and Html Table using data returned by API
+* We will populate and Html Table using data returned by API
 
 ### **Step 1: Creating client side model**
 
-As mentioned above the `JSON `structure returned by API looks like this
+As mentioned above the JSON structure returned by API looks like this
 
 ```json
 {
@@ -73,7 +71,7 @@ As mentioned above the `JSON `structure returned by API looks like this
 }
 ```
 
-Now we will create a matching `Type Script Model` from this returned data. Our Type Script Model will look like this:
+Now we will create a matching Type Script Model, called `LineGraphData`.
 
 ```ts
 export interface LineGraphData {
@@ -85,16 +83,13 @@ export interface LineGraphData {
 
 ----------------
 
-### **Step 2: Set API Url Base in Enviorment Variable**
+### **Step 2: Set API Url Base in Environment Variable**
 
-What Does Base URL Mean? 
-
-In web development, design applications can define a base URL or base location, which helps in converting relative web URLs on the specific page to absolute web URLs
 
 To set this up
 
 * Copy the Base URL from our API
-* Then  create a variable `apiUrlBase` in our enviornment's type script file
+* Then  create a variable `apiUrlBase` in our environment's type script file
 * Assign this Url to the variable as show below
 
 ```ts
@@ -108,12 +103,11 @@ To set this up
 
  To create a transaction service we can follow these steps:
  * First import HttpClinetModule in *module.ts* file
- ```ts
- import { HttpClientModule } from '@angular/common/http';
- ```
- in imports section also add this module
 
  ```ts
+ import { HttpClientModule } from '@angular/common/http';
+
+ // adding http client module in imports section
  imports: [
     HttpClientModule 
   ]
@@ -126,11 +120,12 @@ To set this up
   ```
   * In this service we will first import *HttpClient* and *LineGraphData* we have created
   ```ts
+ // Importing modules
 import {HttpClient} from '@angular/common/http'
-import { lineGraphData } from '../models/line-graph-data';
-  ```
-  * We will create a constructor and assign local variable *HttpClient* 
-```ts
+import { LineGraphData } from '../models/line-graph-data';
+  
+  // Injecting HttpClient in the constructor 
+
 constructor(private httpclient:HttpClient) { }
 ```
   * Now on the Api we have a function called GetLastThreeYearBalances that takes in the accountID as paramenter and can be accessed at location Transactio/GetLastThreeYearBalances. 
@@ -138,7 +133,7 @@ constructor(private httpclient:HttpClient) { }
   We will create a function called getLastThreeYearBalances in transaction service to fetch that data from api.
 
   ```ts
-  //retruns Observable of LineGraphData after hitting the api using httpClient's Get method.
+  //returns Observable of LineGraphData after hitting the api using httpClient's Get method.
 
     getThreeYearsBalances(accountId :string):
         Observable<lineGraphData>{
@@ -149,35 +144,34 @@ constructor(private httpclient:HttpClient) { }
   ```
   ### **Step 4: Call the API and store the data**
 
-  In this step we will follow these further steps to complete the task:
-  * Create a new component or choose existing *app.component.ts* file
-  * Import *LineGraphData* model and *TransactionService* we created
-  ```ts
-import { lineGraphData } from './models/line-graph-data';
-import { TransactionService } from './services/transaction.service';
-  ```
-  * Create local variable *LineGraphData* of `LineGraphData` type 
-  ```ts
-lineGraphData: lineGraphData;
-  ```
-  ERROR: At this stage if you face error while asigning this variable, It might be because of no permission in configuration file. 
-  To solve this error use this permission in *tsconfig.json* file
-  ```json
-  "strictPropertyInitialization": false
-  ```
-  * Create a constructor and assign variable *transactionService* to `TransactionService` type
-  ```ts
-  constructor(private transactionService: TransactionService) {}
-  ```
 
-  * Now we will pass accountID in transaction service and use `subscribe` to store returned data in *lineGraphData*
+  * Create a new component or choose existing *app.component.ts* file
   ```ts
+  // Importing LineGraphData model and TransactionService
+import { LineGraphData } from './models/line-graph-data';
+import { TransactionService } from './services/transaction.service';
+  
+  // Creating a local variable LineGraphData 
+LineGraphData: LineGraphData;
+  ```
+  >ERROR: If you face error while assigning this variable, It might be because of no permission in configuration file. 
+  To solve this error use this permission in *tsconfig.json* file
+  >```json
+  >"strictPropertyInitialization": false
+  >```
+  
+  ```ts
+  // Inject transactionService in the constructor
+  constructor(private transactionService: TransactionService) {}
+
+  // Pass accountID in transaction service and `subscribe` to store returned data in LineGraphData
+  
   ngOnInit(): void {
     this.transactionService
       .getThreeYearsBalances('37846734-172e-4149-8cec-6f43d1eb3f60')
       .subscribe({
         next: (data) => {
-          this.lineGraphData = data;
+          this.LineGraphData = data;
         },
         error: (error) => {
           console.log(error);
@@ -185,23 +179,24 @@ lineGraphData: lineGraphData;
       });
   }
   ```
-  here `37846734-172e-4149-8cec-6f43d1eb3f60` is our hard coded account ID we got from API Url
+  here `37846734-172e-4149-8cec-6f43d1eb3f60` is our hard coded account ID 
 
   Now variable *LineGraphData* has all the data that is available in API. 
 
  
  ### **Step 5: Allow Cross Origion Request**
 
-  At this point you must face an error as no data has been returned from the Api. This may be because you have no permission to access the api. 
+  At this point you might face an error as no data has been returned from the Api. This may be because you have no permission to access the api. 
   
   Now will move to API's code to solve this issue.
-  * In *Program.cs* file use this command to assign variable
+  * Open *Program.cs* file 
   ```c#
+  // Creating a local variable
   var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-  ```
-  * Now use this code and paste our URL by which we are trying to reach this API. In our case this URL is http://localhost:4200
 
-  ```c#
+  // Adding policy called MyAllowSpecificOrigins
+  // Allowing all the requests from http://localhost:4200
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: MyAllowSpecificOrigins,
@@ -213,53 +208,16 @@ builder.Services.AddCors(options =>
                       });
 });
 
-  ```
-  * Now  Configure the HTTP request pipeline by using
+  // Configuring the HTTP request pipeline by using
 
-```c#
-app.UseCors(MyAllowSpecificOrigins);
+ app.UseCors(MyAllowSpecificOrigins);
 ```
 
 This procedure will successfully allow your Url to access your Api
 
 ### **Step 6:  Creating table and printing returned data**
 
-* In *Html* file we will first create table while use desired class
-```html
-<table width="100%" class="table table-striped table-hover">
-
-</table>
-```
-* Now inside table create *head* and *body* of the table
-
-  To create head use:
-  ```html
-    <thead>
-        <tr>
-          <th width="20%">Years</th>
-          <th width="20%">Balances</th>
-        </tr>
-    </thead>
-  ```
-  here our first rows are hard coded as this data is not variable
-
-  To create body use:
-  ```html
-  <tbody>
-        <tr *ngFor="let item of lineGraphData?.labels; let i = index">
-          <td>
-            {{ item }}
-          </td>
-          <td>
-            {{ lineGraphData.figures[i] }}
-          </td>
-        </tr>
-      </tbody>
-  ```
-  In this we have used *for loop* on labels to print Labels data in first column while saving index value in variable *'i'*.
-
-  On the same time we will print figures in next column while using that index value. 
-* To make our table look good we will add styling to our table. To fulfil this we will use this in component's *CSS* file 
+* To make our table look good we will add following styling to our table in the component's *CSS* file 
 ```css
 .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
     border-color: rgba(255,255,255,.1);
@@ -276,8 +234,48 @@ This procedure will successfully allow your Url to access your Api
     border: 0;
 }
 ```
+
+* In  the *tempelate* we will first create table with the desired css classes
+```html
+<table width="100%" class="table table-striped table-hover">
+
+</table>
+```
+* Now inside table create *head* and *body* of the table
+
+  Html's head section:
+
+  In our returned structure we have 2 arrays *labels* and *figures*. To show them in the column structure we will use following html code
+  ```html
+    <thead>
+        <tr>
+          <th width="20%">Years</th>
+          <th width="20%">Balances</th>
+        </tr>
+    </thead>
+  ```
+  
+
+  Html's body section:
+  ```html
+  <tbody>
+        <tr *ngFor="let item of lineGraphData?.labels; let i = index">
+          <td>
+            {{ item }}
+          </td>
+          <td>
+            {{ lineGraphData.figures[i] }}
+          </td>
+        </tr>
+      </tbody>
+  ```
+  In this we have used *for loop* on labels to print Labels data in first column while saving index value in variable *'i'*.
+
+  On the same time we will print figures in next column while using that index value. 
+
 -----------
-### This will fulfill the task and our final output will look like this
+### Final output will look like this
+
 ![](/BBBank_UI/src/assets/images/2.png)
 
 
