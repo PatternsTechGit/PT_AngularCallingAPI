@@ -22,11 +22,12 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllers();
 
 builder.Services.AddScoped<ITransactionService, TransactionService>();
-builder.Services.AddDbContext<BBBankContext>();
+builder.Services.AddSingleton<BBBankContext>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 app.UseCors(MyAllowSpecificOrigins);
+
 app.UseAuthorization();
 
 app.MapControllers();

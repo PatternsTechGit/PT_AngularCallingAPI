@@ -11,7 +11,7 @@ export class TransactionService {
 
   constructor(private httpclient:HttpClient) { }
   getThreeYearsBalances(accountId :string): Observable<lineGraphData>{
-  return this.httpclient.get<lineGraphData>(environment.apiUrlBase + 'Transaction/GetLastThreeYearsBalancesById/'+ accountId);
+  return this.httpclient.get<lineGraphData>(environment.apiUrlBase + 'Transaction/GetLast3MonthBalances/'+ accountId);
 
   }
 
