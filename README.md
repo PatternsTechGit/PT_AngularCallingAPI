@@ -14,19 +14,22 @@ In this lab we will be working on two code Bases, **Backend Code base** and **Fr
 
 ### **Backend Code Base:**
 
-Previously we developed a base structure of an api solution in Asp.net core that have just one function which returns data of the last three years total balances against a given AccountID.
+Previously we developed a base structure of an api solution in Asp.net core that have just two api functions GetLast3MonthBalances & GetLast3MonthBalances/{accountId} which returns data of the last 3 months total balances.
  
-![MicrosoftTeams-image (1)](https://user-images.githubusercontent.com/100709775/161592915-395a3983-2efb-459d-ac63-1815249193f7.png)
+![](/BBBank_UI/src/assets/images/3.png)
 
-There are 4 Projects in the solution.
 
-- **Entities** : That have DB Model Account with one-to-many Transaction and Response Model of LineGraphData that will be returned as API Response.
-- **Infrastructure**: BBBankContext that serves as fake DBContext that populates one Account with three Transactions with hardcoded data.
-- **Services**: That has TransactionService with the logic of converting Account and its Transactions into LineGraphData after fetching it from BBBankContext.
+There are 4 Projects in the solution. 
 
-- **BBBankAPI**: That has TransactionController which is implementation of ASP.net core’s API, to call Services layer.
+*	Entities : This project contains DB models like User where each User has one Account and each Account can have one or many Transactions. There is also a Response Model of LineGraphData that will be returned as API Response. 
 
-![MicrosoftTeams-image](https://user-images.githubusercontent.com/100709775/161592969-78e99e2b-070f-45a5-a15f-8299364f0554.png)
+*	Infrastructure: This project contains BBBankContext that service as fake DBContext that populates one User with its corresponding Account that has three Transactions dated of last three months with hardcoded data. 
+
+* Services: This project contains TransactionService with the logic of converting Transactions into LineGraphData after fetching them from BBBankContext.
+
+* BBBankAPI: This project contains TransactionController with 2 GET methods GetLast3MonthBalances & GetLast3MonthBalances/{accountId} to call the TransactionService.
+
+![](/BBBank_UI/src/assets/images/4.png)
 
 For more details about this base project See: https://github.com/PatternsTechGit/PT_ServiceOrientedArchitecture
 
@@ -102,7 +105,7 @@ To set this up
  ### **Step 3: Creating transaction service**
 
  To create a transaction service we can follow these steps:
- * First import HttpClinetModule in *module.ts* file
+ * First import HttpClientModule in *module.ts* file
 
  ```ts
  import { HttpClientModule } from '@angular/common/http';
@@ -128,7 +131,7 @@ import { LineGraphData } from '../models/line-graph-data';
 
 constructor(private httpclient:HttpClient) { }
 ```
-  * Now on the Api we have a function called GetLastThreeYearBalances that takes in the accountID as paramenter and can be accessed at location Transactio/GetLastThreeYearBalances. 
+  * Now on the Api we have a function called GetLastThreeYearBalances that takes in the accountID as parameter and can be accessed at location Transaction/GetLastThreeYearBalances. 
   
   We will create a function called getLastThreeYearBalances in transaction service to fetch that data from api.
 
