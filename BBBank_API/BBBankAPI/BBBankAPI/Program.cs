@@ -1,10 +1,11 @@
 using Infrastructure;
-using Microsoft.EntityFrameworkCore;
 using Services;
 using Services.Contracts;
 
 var builder = WebApplication.CreateBuilder(args);
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+// Allow CORS request
 
 builder.Services.AddCors(options =>
 {
@@ -33,3 +34,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
+
+

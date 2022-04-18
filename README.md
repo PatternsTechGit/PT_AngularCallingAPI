@@ -138,11 +138,11 @@ constructor(private httpclient:HttpClient) { }
   ```ts
   //returns Observable of LineGraphData after hitting the api using httpClient's Get method.
 
-    getThreeYearsBalances(accountId :string):
+    GetLast3MonthBalances(accountId :string):
         Observable<lineGraphData>{
         return this.httpclient.get<lineGraphData>
         (environment.apiUrlBase +
-        'Transaction/GetLastThreeYearsBalancesById/'+ accountId);
+        'Transaction/GetLast3MonthBalances/'+ accountId);
   }
   ```
   ### **Step 4: Call the API and store the data**
@@ -171,7 +171,7 @@ LineGraphData: LineGraphData;
   
   ngOnInit(): void {
     this.transactionService
-      .getThreeYearsBalances('37846734-172e-4149-8cec-6f43d1eb3f60')
+      .GetLast3MonthBalances('37846734-172e-4149-8cec-6f43d1eb3f60')
       .subscribe({
         next: (data) => {
           this.LineGraphData = data;

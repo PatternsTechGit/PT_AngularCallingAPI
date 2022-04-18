@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class TransactionService {
   constructor(private httpclient: HttpClient) {}
-  getThreeYearsBalances(accountId: string): Observable<lineGraphData> {
+  GetLast3MonthBalances(accountId: string): Observable<lineGraphData> {
     return this.httpclient.get<lineGraphData>(
       environment.apiUrlBase + 'Transaction/GetLast3MonthBalances/' + accountId
     );

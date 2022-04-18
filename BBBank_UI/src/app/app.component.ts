@@ -8,12 +8,15 @@ import { TransactionService } from './services/transaction.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
+
   title = 'BBBankUI';
   lineGraphData: lineGraphData;
+
   constructor(private transactionService: TransactionService) {}
+
   ngOnInit(): void {
     this.transactionService
-      .getThreeYearsBalances('37846734-172e-4149-8cec-6f43d1eb3f60')
+      .GetLast3MonthBalances('37846734-172e-4149-8cec-6f43d1eb3f60')
       .subscribe({
         next: (data) => {
           this.lineGraphData = data;
