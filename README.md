@@ -14,9 +14,9 @@ In this lab we will be working on two code Bases, **Backend Code base** and **Fr
 
 ### **Backend Code Base:**
 
-Previously we developed a base structure of an api solution in Asp.net core that have just two api functions GetLast3MonthBalances & GetLast3MonthBalances/{accountId} which returns data of the last 3 months total balances.
- 
-![](/BBBank_UI/src/assets/images/3.png)
+Previously we developed a base structure of an api solution in Asp.net core that have just two api functions GetLast12MonthBalances & GetLast12MonthBalances/{accountId} which returns data of the last 12 months total balances.
+
+![image-20220419083228428](C:\Users\Patterns Tech\AppData\Roaming\Typora\typora-user-images\image-20220419083228428.png)
 
 
 There are 4 Projects in the solution. 
@@ -27,7 +27,7 @@ There are 4 Projects in the solution.
 
 * Services: This project contains TransactionService with the logic of converting Transactions into LineGraphData after fetching them from BBBankContext.
 
-* BBBankAPI: This project contains TransactionController with 2 GET methods GetLast3MonthBalances & GetLast3MonthBalances/{accountId} to call the TransactionService.
+* BBBankAPI: This project contains TransactionController with 2 GET methods GetLast12MonthBalances & GetLast12MonthBalances/{accountId} to call the TransactionService.
 
 ![](/BBBank_UI/src/assets/images/4.png)
 
@@ -100,7 +100,7 @@ To set this up
         apiUrlBase: 'http://localhost:5070/api/'
         };
 ```
- -------------------
+-------------------
 
  ### **Step 3: Creating transaction service**
 
@@ -114,7 +114,7 @@ To set this up
  imports: [
     HttpClientModule 
   ]
-  ```
+ ```
 
   * Now we will create service named `transaction` from terminal using this command
 
@@ -130,19 +130,19 @@ import { LineGraphData } from '../models/line-graph-data';
   // Injecting HttpClient in the constructor 
 
 constructor(private httpclient:HttpClient) { }
-```
-  * Now on the Api we have a function called GetLastThreeYearBalances that takes in the accountID as parameter and can be accessed at location Transaction/GetLastThreeYearBalances. 
-  
-  We will create a function called getLastThreeYearBalances in transaction service to fetch that data from api.
+  ```
+  * Now on the Api we have a function called GetLast12MonthBalances that takes in the accountID as parameter and can be accessed at location Transaction/GetLast12MonthBalances. 
+
+  We will create a function called getLast12MonthBalances in transaction service to fetch that data from api.
 
   ```ts
   //returns Observable of LineGraphData after hitting the api using httpClient's Get method.
 
-    GetLast3MonthBalances(accountId :string):
+    getLast12MonthBalances(accountId :string):
         Observable<lineGraphData>{
         return this.httpclient.get<lineGraphData>
         (environment.apiUrlBase +
-        'Transaction/GetLast3MonthBalances/'+ accountId);
+        'Transaction/GetLast12MonthBalances/'+ accountId);
   }
   ```
   ### **Step 4: Call the API and store the data**
@@ -162,7 +162,7 @@ LineGraphData: LineGraphData;
   >```json
   >"strictPropertyInitialization": false
   >```
-  
+
   ```ts
   // Inject transactionService in the constructor
   constructor(private transactionService: TransactionService) {}
@@ -171,7 +171,7 @@ LineGraphData: LineGraphData;
   
   ngOnInit(): void {
     this.transactionService
-      .GetLast3MonthBalances('37846734-172e-4149-8cec-6f43d1eb3f60')
+      .GetLast12MonthBalances('37846734-172e-4149-8cec-6f43d1eb3f60')
       .subscribe({
         next: (data) => {
           this.LineGraphData = data;
@@ -186,11 +186,11 @@ LineGraphData: LineGraphData;
 
   Now variable *LineGraphData* has all the data that is available in API. 
 
- 
+
  ### **Step 5: Allow Cross Origion Request**
 
   At this point you might face an error as no data has been returned from the Api. This may be because you have no permission to access the api. 
-  
+
   Now will move to API's code to solve this issue.
   * Open *Program.cs* file 
   ```c#
@@ -214,7 +214,7 @@ builder.Services.AddCors(options =>
   // Configuring the HTTP request pipeline by using
 
  app.UseCors(MyAllowSpecificOrigins);
-```
+  ```
 
 This procedure will successfully allow your Url to access your Api
 
@@ -252,7 +252,7 @@ This procedure will successfully allow your Url to access your Api
   ```html
     <thead>
         <tr>
-          <th width="20%">Years</th>
+          <th width="20%">Month</th>
           <th width="20%">Balances</th>
         </tr>
     </thead>
@@ -282,7 +282,7 @@ This procedure will successfully allow your Url to access your Api
 ![](/BBBank_UI/src/assets/images/2.png)
 
 
- 
+
 
 
 
