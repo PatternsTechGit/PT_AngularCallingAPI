@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.transactionService
-      .GetLast3MonthBalances('37846734-172e-4149-8cec-6f43d1eb3f60')
+      .GetLast12MonthBalances('37846734-172e-4149-8cec-6f43d1eb3f60')
       .subscribe({
         next: (data) => {
           this.lineGraphData = data;
