@@ -16,7 +16,7 @@ In this lab we will be working on two code Bases, **Backend Code base** and **Fr
 
 Previously we developed a base structure of an api solution in Asp.net core that have just two api functions GetLast12MonthBalances & GetLast12MonthBalances/{accountId} which returns data of the last 12 months total balances.
 
-![image-20220419083228428](C:\Users\Patterns Tech\AppData\Roaming\Typora\typora-user-images\image-20220419083228428.png)
+![image-20220419084900804](C:\Users\Patterns Tech\AppData\Roaming\Typora\typora-user-images\image-20220419084900804.png)
 
 
 There are 4 Projects in the solution. 
