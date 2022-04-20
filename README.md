@@ -14,7 +14,7 @@ In this lab we will be working on two code Bases, **Backend Code base** and **Fr
 
 ### **Backend Code Base:**
 
-Previously we developed a base structure of an api solution in Asp.net core that have just two api functions GetLast12MonthBalances & GetLast12MonthBalances/{accountId} which returns data of the last 12 months total balances.
+Previously we developed a base structure of an api solution in Asp.net core that have just two api functions GetLast12MonthBalances & GetLast12MonthBalances/{userId} which returns data of the last 12 months total balances.
 
 ![](/BBBank_UI/src/assets/images/12m.jpg)
 
@@ -27,7 +27,7 @@ There are 4 Projects in the solution.
 
 * Services: This project contains TransactionService with the logic of converting Transactions into LineGraphData after fetching them from BBBankContext.
 
-* BBBankAPI: This project contains TransactionController with 2 GET methods GetLast12MonthBalances & GetLast12MonthBalances/{accountId} to call the TransactionService.
+* BBBankAPI: This project contains TransactionController with 2 GET methods GetLast12MonthBalances & GetLast12MonthBalances/{userId} to call the TransactionService.
 
 ![](/BBBank_UI/src/assets/images/4.png)
 
@@ -131,18 +131,18 @@ import { LineGraphData } from '../models/line-graph-data';
 
 constructor(private httpclient:HttpClient) { }
   ```
-  * Now on the Api we have a function called GetLast12MonthBalances that takes in the accountID as parameter and can be accessed at location Transaction/GetLast12MonthBalances. 
+  * Now on the Api we have a function called GetLast12MonthBalances that takes in the userId as parameter and can be accessed at location Transaction/GetLast12MonthBalances. 
 
   We will create a function called getLast12MonthBalances in transaction service to fetch that data from api.
 
   ```ts
   //returns Observable of LineGraphData after hitting the api using httpClient's Get method.
 
-    getLast12MonthBalances(accountId :string):
+    getLast12MonthBalances(userId :string):
         Observable<lineGraphData>{
         return this.httpclient.get<lineGraphData>
         (environment.apiUrlBase +
-        'Transaction/GetLast12MonthBalances/'+ accountId);
+        'Transaction/GetLast12MonthBalances/'+ userId);
   }
   ```
   ### **Step 4: Call the API and store the data**
@@ -167,11 +167,11 @@ LineGraphData: LineGraphData;
   // Inject transactionService in the constructor
   constructor(private transactionService: TransactionService) {}
 
-  // Pass accountID in transaction service and `subscribe` to store returned data in LineGraphData
+  // Pass userID in transaction service and `subscribe` to store returned data in LineGraphData
   
   ngOnInit(): void {
     this.transactionService
-      .GetLast12MonthBalances('37846734-172e-4149-8cec-6f43d1eb3f60')
+      .GetLast12MonthBalances('aa45e3c9-261d-41fe-a1b0-5b4dcf79cfd3')
       .subscribe({
         next: (data) => {
           this.LineGraphData = data;
@@ -182,7 +182,7 @@ LineGraphData: LineGraphData;
       });
   }
   ```
-  here `37846734-172e-4149-8cec-6f43d1eb3f60` is our hard coded account ID 
+  here `aa45e3c9-261d-41fe-a1b0-5b4dcf79cfd3` is our hard coded userId 
 
   Now variable *LineGraphData* has all the data that is available in API. 
 

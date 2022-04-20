@@ -9,9 +9,9 @@ import { environment } from 'src/environments/environment';
 })
 export class TransactionService {
   constructor(private httpclient: HttpClient) {}
-  GetLast12MonthBalances(accountId: string): Observable<lineGraphData> {
+  GetLast12MonthBalances(userId: string): Observable<lineGraphData> {
     return this.httpclient.get<lineGraphData>(
-      environment.apiUrlBase + 'Transaction/GetLast12MonthBalances/' + accountId
+      environment.apiUrlBase + 'Transaction/GetLast12MonthBalances/' + userId
     );
   }
 }
