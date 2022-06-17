@@ -12,7 +12,7 @@ namespace Infrastructure
             // initializing a new user 
             this.Users.Add(new User
             {
-                Id = "aa45e3c9-261d-41fe-a1b0-5b4dcf79cfd3",
+                Id = "37846734-172e-4149-8cec-6f43d1eb3f60",
                 FirstName = "Raas",
                 LastName = "Masood",
                 Email = "rassmasood@hotmail.com",
@@ -25,7 +25,7 @@ namespace Infrastructure
             // initializing a new account 
             this.Accounts.Add(new Account
             {
-                Id = "37846734-172e-4149-8cec-6f43d1eb3f60",
+                Id = "aa45e3c9-261d-41fe-a1b0-5b4dcf79cfd3",
                 AccountNumber = "0001-1001",
                 AccountTitle = "Raas Masood",
                 CurrentBalance = 3500M,
