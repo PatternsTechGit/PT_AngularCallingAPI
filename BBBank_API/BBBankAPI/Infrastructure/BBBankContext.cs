@@ -4,6 +4,7 @@ namespace Infrastructure
 {
     public class BBBankContext
     {
+        private string AzureADUserID = "37846734-172e-4149-8cec-6f43d1eb3f60";
         public BBBankContext()
         {
             // creating the collection for user list
@@ -12,7 +13,7 @@ namespace Infrastructure
             // initializing a new user 
             this.Users.Add(new User
             {
-                Id = "37846734-172e-4149-8cec-6f43d1eb3f60",
+                Id = AzureADUserID,
                 FirstName = "Raas",
                 LastName = "Masood",
                 Email = "rassmasood@hotmail.com",
