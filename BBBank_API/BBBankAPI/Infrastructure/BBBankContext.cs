@@ -4,7 +4,7 @@ namespace Infrastructure
 {
     public class BBBankContext
     {
-        private string AzureADUserID = "37846734-172e-4149-8cec-6f43d1eb3f60";
+        private string AzureADUserID = "aa45e3c9-261d-41fe-a1b0-5b4dcf79cfd3";
         public BBBankContext()
         {
             // creating the collection for user list

@@ -48,33 +48,50 @@ _____________
 
 ## In this exercise
 
-* We will create client side models to receive data
-* We will create transaction service to call the API
-* We will fix the Cors Error on the server side
-* We will populate and Html Table using data returned by API
+* We will create client side models to **receive data**
+* We will create transaction service to **call the API**
+* We will fix the **CORS error** on the server side
+* We will populate and **html table** using data returned by API
 
 ### **Step 1: Creating client side model**
 
-As mentioned above the JSON structure returned by API looks like this
+At the moment when you run our API it will return, the JSON structure returned by API looks like this
 
 ```json
 {
-    "totalBalance": 3500,
-
+    "totalBalance": 1555,
     "labels": [
-                "2020",
-                "2021",
-                "2022"
-              ],
-    "figures": [
-                1000,
+                "Jul 2021",
+                "Aug 2021",
+                "Sep 2021",
+                "Oct 2021",
+                "Nov 2021",
+                "Dec 2021",
+                "Jan 2022",
+                "Feb 2022",
+                "Mar 2022",
+                "Apr 2022",
+                "May 2022",
+                "Jun 2022"
+                ],
+      "figures": [
+                900,
+                400,
+                600,
                 500,
-                3500
+                200,
+                400,
+                900,
+                700,
+                700,
+                655,
+                555,
+                1555
                 ]
 }
 ```
 
-Now we will create a matching Type Script Model, called `LineGraphData`.
+We will create a matching Type Script Model and name it `LineGraphData`.
 
 ```ts
 export interface LineGraphData {
@@ -131,9 +148,9 @@ import { LineGraphData } from '../models/line-graph-data';
 
 constructor(private httpclient:HttpClient) { }
   ```
-  * Now on the Api we have a function called GetLast12MonthBalances that takes in the userId as parameter and can be accessed at location Transaction/GetLast12MonthBalances. 
+  * Now on the Api we have a function called *GetLast12MonthBalances* that takes in the userId as parameter and can be accessed at location `Transaction/GetLast12MonthBalances`. 
 
-  We will create a function called getLast12MonthBalances in transaction service to fetch that data from api.
+  We will create a function called *GetLast12MonthBalances* in transaction service(*transaction.service.ts*) to fetch that data from api.
 
   ```ts
   //returns Observable of LineGraphData after hitting the api using httpClient's Get method.
@@ -192,7 +209,7 @@ LineGraphData: LineGraphData;
   At this point you might face an error as no data has been returned from the Api. This may be because you have no permission to access the api. 
 
   Now will move to API's code to solve this issue.
-  * Open *Program.cs* file 
+  * Open *Program.cs* file and below given code to allow cross origin request
   ```c#
   // Creating a local variable
   var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -279,7 +296,7 @@ This procedure will successfully allow your Url to access your Api
 -----------
 ### Final output will look like this
 
-![](/BBBank_UI/src/assets/images/2.png)
+![](/BBBank_UI/src/assets/images/1.jpg)
 
 
 
