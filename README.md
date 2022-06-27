@@ -4,7 +4,7 @@
 
 **HTTP** is a communications protocol that transports messages over a network. **Rest** is a protocol to exchange any(*XML or JSON*) messages that can use HTTP to transport those messages.
 
-A RESTful API is an architectural style for an application program interface (API) that uses HTTP requests to access and use data. That data can be used to GET, PUT, POST and DELETE data types, which refers to the reading, updating, creating and deleting of operations concerning resources.
+A **RESTful API** is an architectural style for an application program interface (API) that uses **HTTP requests** to access and use data. That data can be used to *GET, PUT, POST and DELETE* data types, which refers to the *reading, updating, creating and deleting* of operations concerning resources.
 
 ---------------
 
@@ -14,20 +14,20 @@ In this lab we will be working on two code Bases, **Backend Code base** and **Fr
 
 ### **Backend Code Base:**
 
-Previously we developed a base structure of an api solution in Asp.net core that have just two api functions GetLast12MonthBalances & GetLast12MonthBalances/{userId} which returns data of the last 12 months total balances.
+Previously we developed a base structure of an api solution in Asp.net core that have just two api functions *GetLast12MonthBalances* & *GetLast12MonthBalances/{userId}* which returns data of the last 12 months total balances.
 
 ![](/BBBank_UI/src/assets/images/12m.jpg)
 
 
 There are 4 Projects in the solution. 
 
-*	Entities : This project contains DB models like User where each User has one Account and each Account can have one or many Transactions. There is also a Response Model of LineGraphData that will be returned as API Response. 
+*	**Entities :** This project contains DB models like User where each User has one Account and each Account can have one or many Transactions. There is also a Response Model of LineGraphData that will be returned as API Response. 
 
-*	Infrastructure: This project contains BBBankContext that service as fake DBContext that populates one User with its corresponding Account that has three Transactions dated of last three months with hardcoded data. 
+*	**Infrastructure:** This project contains BBBankContext that service as fake DBContext that populates one User with its corresponding Account that has three Transactions dated of last three months with hardcoded data. 
 
-* Services: This project contains TransactionService with the logic of converting Transactions into LineGraphData after fetching them from BBBankContext.
+* **Services:** This project contains TransactionService with the logic of converting Transactions into LineGraphData after fetching them from BBBankContext.
 
-* BBBankAPI: This project contains TransactionController with 2 GET methods GetLast12MonthBalances & GetLast12MonthBalances/{userId} to call the TransactionService.
+* **BBBankAPI:** This project contains TransactionController with 2 GET methods GetLast12MonthBalances & GetLast12MonthBalances/{userId} to call the TransactionService.
 
 ![](/BBBank_UI/src/assets/images/4.png)
 
@@ -108,7 +108,7 @@ export interface LineGraphData {
 
 To set this up
 
-* Copy the Base URL from our API
+* Copy the **Base Url** from our API
 * Then  create a variable `apiUrlBase` in our environment's type script file
 * Assign this Url to the variable as show below
 
@@ -122,7 +122,7 @@ To set this up
  ### **Step 3: Creating transaction service**
 
  To create a transaction service we can follow these steps:
- * First import HttpClientModule in *module.ts* file
+ * First import `HttpClientModule` in *module.ts* file
 
  ```ts
  import { HttpClientModule } from '@angular/common/http';
