@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "d:\\source code\\PT_AngularCallingAPI\\BBBank_API\\BBBankAPI\\Entities\\Entities.csproj",
+      "projectUniqueName": "D:\\source code\\PT_AngularCallingAPI\\BBBank_API\\BBBankAPI\\Entities\\Entities.csproj",
       "projectName": "Entities",
-      "projectPath": "d:\\source code\\PT_AngularCallingAPI\\BBBank_API\\BBBankAPI\\Entities\\Entities.csproj",
+      "projectPath": "D:\\source code\\PT_AngularCallingAPI\\BBBank_API\\BBBankAPI\\Entities\\Entities.csproj",
       "packagesPath": "C:\\Users\\rajaa\\.nuget\\packages\\",
-      "outputPath": "d:\\source code\\PT_AngularCallingAPI\\BBBank_API\\BBBankAPI\\Entities\\obj\\",
+      "outputPath": "D:\\source code\\PT_AngularCallingAPI\\BBBank_API\\BBBankAPI\\Entities\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\rajaa\\AppData\\Roaming\\NuGet\\NuGet.Config",
